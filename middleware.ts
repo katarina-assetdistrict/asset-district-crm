@@ -27,6 +27,11 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
+  // Webhooks are public endpoints — skip auth
+  if (pathname.startsWith('/api/webhooks')) {
+    return supabaseResponse
+  }
+
   if (!user && !pathname.startsWith('/login')) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
