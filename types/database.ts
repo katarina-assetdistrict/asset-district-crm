@@ -3,6 +3,19 @@ export type LeadStage = 'New' | 'Call Scheduled' | 'Call Done' | 'Proposal Sent'
 export type LeadPriority = 'Hot' | 'Warm' | 'Cold'
 export type ServiceType = 'Strategy Package' | 'Consulting' | 'Retainer' | 'Other'
 
+export interface MetaLeadData {
+  leadgen_id:    string
+  form_id:       string
+  page_id:       string
+  ad_id?:        string | null
+  ad_name?:      string | null
+  adset_name?:   string | null
+  campaign_id?:  string | null
+  campaign_name?: string | null
+  raw_fields?:   Record<string, string>
+  received_at?:  string
+}
+
 export interface Lead {
   id: string
   created_at: string
@@ -17,6 +30,7 @@ export interface Lead {
   deal_value: number | null
   service_type: ServiceType
   lost_reason: string | null
+  meta_data?: MetaLeadData | null
 }
 
 export interface CallNote {
